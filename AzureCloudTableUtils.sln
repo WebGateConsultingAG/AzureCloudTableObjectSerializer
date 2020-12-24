@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudTableObjectSerializer", "CloudTableObjectSerializer\CloudTableObjectSerializer.csproj", "{2F257D2C-EE57-465C-AE0F-FCF55FD9AB4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudTableUtils", "CloudTableUtils\CloudTableUtils.csproj", "{2F257D2C-EE57-465C-AE0F-FCF55FD9AB4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudTableObjectSerializerTest", "CloudTableObjectSerializerTest\CloudTableObjectSerializerTest.csproj", "{5A924C56-C858-4C26-A731-4E5E34F85197}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudTableUtilsTest", "CloudTableUtilsTest\CloudTableUtilsTest.csproj", "{5A924C56-C858-4C26-A731-4E5E34F85197}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

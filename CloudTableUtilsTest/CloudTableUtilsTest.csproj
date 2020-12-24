@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CloudTableObjectSerializer\CloudTableObjectSerializer.csproj" />
+    <ProjectReference Include="..\CloudTableUtils\CloudTableUtils.csproj" />
   </ItemGroup>
 
 </Project>

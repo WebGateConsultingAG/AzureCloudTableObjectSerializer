@@ -1,5 +1,5 @@
 using System;
-namespace CloudTableObjectSerializerTest {
+namespace WebGate.Azure.CloudTableUtilsTest {
 
     public class SimplePoco {
         public string Id {set;get;}

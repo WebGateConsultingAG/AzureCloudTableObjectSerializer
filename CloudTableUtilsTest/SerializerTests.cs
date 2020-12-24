@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CloudTableObjectSerializer;
+using WebGate.Azure.CloudTableUtils;
 using Microsoft.Azure.Cosmos.Table;
 
-namespace CloudTableObjectSerializerTest
+namespace WebGate.Azure.CloudTableUtilsTest
 {
     [TestClass]
     public class SerlializerTests {

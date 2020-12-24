@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Azure.Cosmos.Table;
 
-namespace CloudTableObjectSerializer
+namespace WebGate.Azure.CloudTableUtils
 {
     public class ObjectSerializer{
 
