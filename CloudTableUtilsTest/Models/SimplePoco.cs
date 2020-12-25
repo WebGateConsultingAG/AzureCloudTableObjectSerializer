@@ -15,5 +15,24 @@ namespace WebGate.Azure.CloudTableUtilsTest {
 
         public DateTimeOffset DTOValue {set;get;}
 
+
+        public static SimplePoco CreateInitializedPoco() {
+            SimplePoco simplePoco = new SimplePoco();
+            simplePoco.Id = "02381012";
+            simplePoco.DoubleValue = 2018101.00812;
+            simplePoco.IntValue=9789677;
+            simplePoco.DTOValue = new DateTimeOffset();
+            simplePoco.LongValue = 100008937819;
+            simplePoco.GuidValue = new Guid();
+            simplePoco.DTValue = new DateTime();
+            return simplePoco;
+        }
+
+        public static SimplePoco CreatePocoWithoutID() {
+            SimplePoco sp = CreateInitializedPoco();
+            sp.Id = null;
+            return sp;
+        }
+
     }
 }

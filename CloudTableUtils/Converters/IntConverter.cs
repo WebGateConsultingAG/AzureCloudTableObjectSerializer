@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using Microsoft.Azure.Cosmos.Table;
 
 namespace WebGate.Azure.CloudTableUtils.Converter {
-    public class StringConverter:IConverter {
+    public class IntConverter:IConverter {
         public bool IsType(Type type) {
-            return type == typeof(string);
+            return type == typeof(int) || type == typeof(int?);
         }
 
         public EntityProperty GetValue(Type type, Object value){
-            return new EntityProperty((string) value);
+            return type== typeof(int) ? new EntityProperty((int) value) : new EntityProperty((int?) value);
         }
     }
 }

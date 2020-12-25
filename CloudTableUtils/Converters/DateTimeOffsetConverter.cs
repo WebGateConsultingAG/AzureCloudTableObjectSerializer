@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using Microsoft.Azure.Cosmos.Table;
 
 namespace WebGate.Azure.CloudTableUtils.Converter {
-    public class StringConverter:IConverter {
+    public class DateTimeOffsetConverter:IConverter {
         public bool IsType(Type type) {
-            return type == typeof(string);
+            return type == typeof(DateTimeOffset) || type == typeof(DateTimeOffset?);
         }
 
         public EntityProperty GetValue(Type type, Object value){
-            return new EntityProperty((string) value);
+            return type== typeof(DateTimeOffset) ? new EntityProperty((DateTimeOffset) value) : new EntityProperty((DateTimeOffset?) value);
         }
     }
 }

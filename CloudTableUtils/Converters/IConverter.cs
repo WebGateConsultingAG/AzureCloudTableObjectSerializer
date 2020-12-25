@@ -1,8 +1,10 @@
 using System;
 using Microsoft.Azure.Cosmos.Table;
 
-public interface IConverter {
-    public bool IsType(Type type);
+namespace WebGate.Azure.CloudTableUtils.Converter {
+    public interface IConverter {
+        public bool IsType(Type type);
 
-    public EntityProperty GetValue(Type type, Object value);
+        public EntityProperty GetValue(Type type, Object value);
+    }
 }
