@@ -53,5 +53,108 @@ namespace WebGate.Azure.CloudTableUtilsTest
             Assert.IsFalse(allEntities.ContainsKey("Id"));
            
         }
+        [TestMethod]
+        public void TestExtractAllEnitiesFromParentPoco()
+        {
+            ParentPoco pp = ParentPoco.CreateParentWithChild();
+            IDictionary<String,EntityProperty> allEntities = ObjectSerializer.Serialize(pp);
+            Assert.AreEqual(8, allEntities.Count);
+            Assert.IsTrue(allEntities.ContainsKey("Id"));
+
+            Assert.IsTrue(allEntities.ContainsKey("Child_Id"));
+            Assert.AreEqual(allEntities["Child_Id"].StringValue, pp.Child.Id);
+            Assert.AreEqual(allEntities["Child_Id"].PropertyType, EdmType.String);
+            
+            Assert.IsTrue(allEntities.ContainsKey("Child_IntValue"));
+            Assert.AreEqual(allEntities["Child_IntValue"].Int32Value, pp.Child.IntValue);
+            Assert.AreEqual(allEntities["Child_IntValue"].PropertyType, EdmType.Int32);
+
+            Assert.IsTrue(allEntities.ContainsKey("Child_LongValue"));
+            Assert.AreEqual(allEntities["Child_LongValue"].Int64Value, pp.Child.LongValue);
+            Assert.AreEqual(allEntities["Child_LongValue"].PropertyType, EdmType.Int64);
+
+            Assert.IsTrue(allEntities.ContainsKey("Child_DoubleValue"));
+            Assert.AreEqual(allEntities["Child_DoubleValue"].DoubleValue, pp.Child.DoubleValue);
+            Assert.AreEqual(allEntities["Child_DoubleValue"].PropertyType, EdmType.Double);
+
+            Assert.IsTrue(allEntities.ContainsKey("Child_GuidValue"));
+            Assert.AreEqual(allEntities["Child_GuidValue"].GuidValue, pp.Child.GuidValue);
+            Assert.AreEqual(allEntities["Child_GuidValue"].PropertyType, EdmType.Guid);
+
+            Assert.IsTrue(allEntities.ContainsKey("Child_DTValue"));
+            Assert.AreEqual(allEntities["Child_DTValue"].DateTime, pp.Child.DTValue);
+            Assert.AreEqual(allEntities["Child_DTValue"].PropertyType, EdmType.DateTime);
+
+            Assert.IsTrue(allEntities.ContainsKey("Child_DTOValue"));
+            Assert.AreEqual(allEntities["Child_DTOValue"].DateTimeOffsetValue, pp.Child.DTOValue);
+            Assert.AreEqual(allEntities["Child_DTOValue"].PropertyType, EdmType.DateTime);
+
+
+        }
+        [TestMethod]
+        public void TestExtractAllEnitiesFromMainWithParent()
+        {
+            MainWithParent mwp = MainWithParent.CreateMainWithParent();
+            IDictionary<String,EntityProperty> allEntities = ObjectSerializer.Serialize(mwp);
+            Assert.AreEqual(16, allEntities.Count);
+            Assert.IsTrue(allEntities.ContainsKey("Id"));
+
+            Assert.IsTrue(allEntities.ContainsKey("Child_Id"));
+            Assert.AreEqual(allEntities["Child_Id"].StringValue, mwp.Child.Id);
+            Assert.AreEqual(allEntities["Child_Id"].PropertyType, EdmType.String);
+            
+            Assert.IsTrue(allEntities.ContainsKey("Child_IntValue"));
+            Assert.AreEqual(allEntities["Child_IntValue"].Int32Value, mwp.Child.IntValue);
+            Assert.AreEqual(allEntities["Child_IntValue"].PropertyType, EdmType.Int32);
+
+            Assert.IsTrue(allEntities.ContainsKey("Child_LongValue"));
+            Assert.AreEqual(allEntities["Child_LongValue"].Int64Value, mwp.Child.LongValue);
+            Assert.AreEqual(allEntities["Child_LongValue"].PropertyType, EdmType.Int64);
+
+            Assert.IsTrue(allEntities.ContainsKey("Child_DoubleValue"));
+            Assert.AreEqual(allEntities["Child_DoubleValue"].DoubleValue, mwp.Child.DoubleValue);
+            Assert.AreEqual(allEntities["Child_DoubleValue"].PropertyType, EdmType.Double);
+
+            Assert.IsTrue(allEntities.ContainsKey("Child_GuidValue"));
+            Assert.AreEqual(allEntities["Child_GuidValue"].GuidValue, mwp.Child.GuidValue);
+            Assert.AreEqual(allEntities["Child_GuidValue"].PropertyType, EdmType.Guid);
+
+            Assert.IsTrue(allEntities.ContainsKey("Child_DTValue"));
+            Assert.AreEqual(allEntities["Child_DTValue"].DateTime, mwp.Child.DTValue);
+            Assert.AreEqual(allEntities["Child_DTValue"].PropertyType, EdmType.DateTime);
+
+            Assert.IsTrue(allEntities.ContainsKey("Child_DTOValue"));
+            Assert.AreEqual(allEntities["Child_DTOValue"].DateTimeOffsetValue, mwp.Child.DTOValue);
+            Assert.AreEqual(allEntities["Child_DTOValue"].PropertyType, EdmType.DateTime);
+
+            //CHECK PARENT
+            Assert.IsTrue(allEntities.ContainsKey("Parent_Id"));
+            Assert.AreEqual(allEntities["Parent_Id"].StringValue, mwp.Parent.Id);
+            Assert.AreEqual(allEntities["Parent_Id"].PropertyType, EdmType.String);
+            
+            Assert.IsTrue(allEntities.ContainsKey("Parent_Child_IntValue"));
+            Assert.AreEqual(allEntities["Child_IntValue"].Int32Value, mwp.Parent.Child.IntValue);
+            Assert.AreEqual(allEntities["Child_IntValue"].PropertyType, EdmType.Int32);
+
+            Assert.IsTrue(allEntities.ContainsKey("Parent_Child_LongValue"));
+            Assert.AreEqual(allEntities["Child_LongValue"].Int64Value, mwp.Parent.Child.LongValue);
+            Assert.AreEqual(allEntities["Child_LongValue"].PropertyType, EdmType.Int64);
+
+            Assert.IsTrue(allEntities.ContainsKey("Parent_Child_DoubleValue"));
+            Assert.AreEqual(allEntities["Child_DoubleValue"].DoubleValue, mwp.Parent.Child.DoubleValue);
+            Assert.AreEqual(allEntities["Child_DoubleValue"].PropertyType, EdmType.Double);
+
+            Assert.IsTrue(allEntities.ContainsKey("Parent_Child_GuidValue"));
+            Assert.AreEqual(allEntities["Child_GuidValue"].GuidValue, mwp.Parent.Child.GuidValue);
+            Assert.AreEqual(allEntities["Child_GuidValue"].PropertyType, EdmType.Guid);
+
+            Assert.IsTrue(allEntities.ContainsKey("Parent_Child_DTValue"));
+            Assert.AreEqual(allEntities["Child_DTValue"].DateTime, mwp.Parent.Child.DTValue);
+            Assert.AreEqual(allEntities["Child_DTValue"].PropertyType, EdmType.DateTime);
+
+            Assert.IsTrue(allEntities.ContainsKey("Parent_Child_DTOValue"));
+            Assert.AreEqual(allEntities["Child_DTOValue"].DateTimeOffsetValue, mwp.Parent.Child.DTOValue);
+            Assert.AreEqual(allEntities["Child_DTOValue"].PropertyType, EdmType.DateTime);
+        }
     }
 }
