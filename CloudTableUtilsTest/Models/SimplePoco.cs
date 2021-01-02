@@ -49,5 +49,18 @@ namespace WebGate.Azure.CloudTableUtilsTest {
             return sp;
         }
 
+        public override bool Equals(Object obj)
+        {
+            //Check for null and compare run-time types.
+            if ((obj == null) || ! this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else {
+                SimplePoco spo = (SimplePoco) obj;
+            return (Id == spo.Id) && (EnumValue == spo.EnumValue) && (spo.DoubleValue == DoubleValue) && (spo.DTOValue == DTOValue) && (spo.DTValue == DTValue) && (spo.GuidValue == GuidValue);
+        }
+      }
+
     }
 }
