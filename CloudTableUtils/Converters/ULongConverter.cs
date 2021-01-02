@@ -13,5 +13,9 @@ namespace WebGate.Azure.CloudTableUtils.Converter {
         public EntityProperty GetValue(Type type, Object value){
             return type== typeof(ulong) ? new EntityProperty(unchecked(Convert.ToInt64(value, CultureInfo.InvariantCulture))) : new EntityProperty(unchecked((long?) Convert.ToInt64(value,CultureInfo.InvariantCulture)));
         }
+        public object BuildValue(EntityProperty entityProperty, Type type) {
+            return unchecked((ulong)entityProperty.Int64Value);
+        }
+
     }
 }

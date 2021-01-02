@@ -1,11 +1,13 @@
 using System;
+using System.Linq;
 using Microsoft.Azure.Cosmos.Table;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 namespace WebGate.Azure.CloudTableUtils.Converter {
-    public class ArrayConverter:IConverter {
+    public class IEnumerableConverter:IConverter {
         
         public bool IsType(Type type) {
-            return type.IsArray;
+            return type.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof (IEnumerable<>)) ;
         }
 
         public EntityProperty GetValue(Type type, object value) {

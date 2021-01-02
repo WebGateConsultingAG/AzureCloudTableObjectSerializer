@@ -1,6 +1,10 @@
 using System;
 namespace WebGate.Azure.CloudTableUtilsTest {
 
+    public enum SP {
+        VALID,
+        INVALID
+    }
     public class SimplePoco {
         public string Id {set;get;}
         public int IntValue {set;get;}
@@ -15,16 +19,27 @@ namespace WebGate.Azure.CloudTableUtilsTest {
 
         public DateTimeOffset DTOValue {set;get;}
 
+        public uint UIntValue {set;get;}
+
+        public ulong ULongValue {set;get;}
+
+        public TimeSpan TimeSpanValue {set;get;}
+
+        public SP EnumValue {set;get;}
 
         public static SimplePoco CreateInitializedPoco() {
             SimplePoco simplePoco = new SimplePoco();
             simplePoco.Id = "02381012";
             simplePoco.DoubleValue = 2018101.00812;
             simplePoco.IntValue=9789677;
-            simplePoco.DTOValue = new DateTimeOffset();
+            simplePoco.DTOValue = DateTimeOffset.Now;
             simplePoco.LongValue = 100008937819;
-            simplePoco.GuidValue = new Guid();
-            simplePoco.DTValue = new DateTime();
+            simplePoco.GuidValue = Guid.NewGuid();
+            simplePoco.DTValue = DateTime.UtcNow;
+            simplePoco.UIntValue = 392;
+            simplePoco.ULongValue = 1999189917819917881;
+            simplePoco.TimeSpanValue = new TimeSpan(5,3,12);
+            simplePoco.EnumValue = SP.INVALID;
             return simplePoco;
         }
 

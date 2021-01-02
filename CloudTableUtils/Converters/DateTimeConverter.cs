@@ -12,5 +12,10 @@ namespace WebGate.Azure.CloudTableUtils.Converter {
         public EntityProperty GetValue(Type type, Object value){
             return type== typeof(DateTime) ? new EntityProperty((DateTime) value) : new EntityProperty((DateTime?) value);
         }
+
+        public object BuildValue(EntityProperty entityProperty, Type type) {
+            return entityProperty.DateTime;
+        }
+
     }
 }

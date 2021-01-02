@@ -13,5 +13,10 @@ namespace WebGate.Azure.CloudTableUtils.Converter {
         public EntityProperty GetValue(Type type, Object value){
             return type == typeof(bool) ? new EntityProperty((bool) value): new EntityProperty((bool?)value);
         }
+
+        public object BuildValue(EntityProperty entityProperty, Type type) {
+            return null;
+        }
+
     }
 }

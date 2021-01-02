@@ -30,6 +30,7 @@ namespace WebGate.Azure.CloudTableUtils.Converter {
             list.Add(new UIntConverter());
             list.Add(new ULongConverter());
             list.Add(new ArrayConverter());
+            list.Add(new IEnumerableConverter());
             return list;
         }
     }
