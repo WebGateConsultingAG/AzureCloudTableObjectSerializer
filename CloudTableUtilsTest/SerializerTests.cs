@@ -43,6 +43,12 @@ namespace WebGate.Azure.CloudTableUtilsTest
             Assert.AreEqual(allEntities["DTOValue"].DateTimeOffsetValue, spo.DTOValue);
             Assert.AreEqual(allEntities["DTOValue"].PropertyType, EdmType.DateTime);
 
+          
+            Assert.IsTrue(allEntities.ContainsKey("EnumValue"));
+            Assert.AreEqual(allEntities["EnumValue"].StringValue, spo.EnumValue.ToString());
+            Assert.AreEqual(allEntities["EnumValue"].PropertyType, EdmType.String);
+
+
         }
         [TestMethod]
         public void TestExtractAllEnitiesFromSimplePocoWithNullId()

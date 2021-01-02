@@ -13,7 +13,7 @@ namespace WebGate.Azure.CloudTableUtils.Converter {
             return new EntityProperty(jsonValue);
         }
         public object BuildValue(EntityProperty entityProperty, Type type) {
-            return null;
+            return JsonConvert.DeserializeObject(entityProperty.StringValue,type);
         }
 
     }
