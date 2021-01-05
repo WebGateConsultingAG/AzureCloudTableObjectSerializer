@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageId>WebGate.Azure.CloudTableUtils</PackageId>
+    <Version>1.0.0-rc</Version>
+    <Authors>guedeWebGate</Authors>
+    <Company>WebGate Consulting AG</Company>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="1.0.8" />
+  </ItemGroup>
+
+</Project>
