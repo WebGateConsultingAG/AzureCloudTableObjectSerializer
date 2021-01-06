@@ -16,3 +16,5 @@ CloudTableUtilsTest/bin/
 CloudTableUtilsTest/obj/
 
 .DS_Store
+
+CloudTableUtilsTest/TestResults/
