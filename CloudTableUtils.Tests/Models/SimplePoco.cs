@@ -59,8 +59,15 @@ namespace WebGate.Azure.CloudTableUtilsTest {
             else {
                 SimplePoco spo = (SimplePoco) obj;
             return (Id == spo.Id) && (EnumValue == spo.EnumValue) && (spo.DoubleValue == DoubleValue) && (spo.DTOValue == DTOValue) && (spo.DTValue == DTValue) && (spo.GuidValue == GuidValue);
+            }
         }
-      }
+
+        public override int GetHashCode()
+        {
+            return (Id != null ? Id.GetHashCode():0) + EnumValue.GetHashCode();
+        }
+
+      
 
     }
 }

@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 
 namespace WebGate.Azure.CloudTableUtils
 {
-    public class ObjectBuilder {
+    public static class ObjectBuilder {
         public static T Build<T>(IDictionary<string,EntityProperty> entities) {
             T result = (T)FormatterServices.GetUninitializedObject(typeof(T));
             ProcessObject(result, null, entities);
@@ -21,11 +21,11 @@ namespace WebGate.Azure.CloudTableUtils
                 if (entities.ContainsKey(entityName)) {
                     Type pType = propertyInfo.PropertyType;
                     IConverter converter = ConveterFactory.FindConverter(pType);
-                    if (pType != null) {
+                    if (converter != null) {
                         propertyInfo.SetValue(obj, converter.BuildValue(entities[entityName], pType), index:null);
                     } else {
                         if (pType.IsValueType) {
-                            throw new Exception("No convertor found for: "+id +" / "+ pType.ToString());
+                            throw new ConverterException("No convertor found for: "+id +" / "+ pType.ToString());
                         }
                         object child = FormatterServices.GetUninitializedObject(pType);
                         ProcessObject(child, id,entities);
