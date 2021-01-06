@@ -19,6 +19,10 @@ namespace WebGate.Azure.CloudTableUtilsTest {
             mock.Setup(cloudTable=>cloudTable.ExecuteQuerySegmentedAsync(It.IsAny<TableQuery<DynamicTableEntity>>(),It.IsAny<TableContinuationToken>())).ReturnsAsync(result);
             List<SimplePoco> simplePocos = await CloudTableUtils.CloudTableExtension.CloudTableExtensions.GetAllAsync<SimplePoco>(mock.Object);
             Assert.IsNotNull(simplePocos);
+            Assert.AreEqual(6, simplePocos.Count());
+            SimplePoco spo = simplePocos.ElementAt(0);
+            Assert.IsInstanceOfType(spo, typeof(SimplePoco));
+            Assert.AreEqual("001", spo.Id);
         }
     }
 
