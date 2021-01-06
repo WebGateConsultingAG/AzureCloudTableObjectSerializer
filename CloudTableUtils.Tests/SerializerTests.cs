@@ -162,5 +162,12 @@ namespace WebGate.Azure.CloudTableUtilsTest
             Assert.AreEqual(allEntities["Parent_Child_DTOValue"].DateTimeOffsetValue, mwp.Parent.Child.DTOValue);
             Assert.AreEqual(allEntities["Parent_Child_DTOValue"].PropertyType, EdmType.DateTime);
         }
+
+        [TestMethod]
+        public void TestConverterException() {
+            UnsupportedTypePoco ustp = new UnsupportedTypePoco();
+            Assert.ThrowsException<ConverterException>(()=>ObjectSerializer.Serialize(ustp));
+        } 
+
     }
 }
