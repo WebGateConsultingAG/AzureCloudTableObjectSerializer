@@ -21,7 +21,7 @@ namespace WebGate.Azure.CloudTableUtils
                 if (entities.ContainsKey(entityName)) {
                     Type pType = propertyInfo.PropertyType;
                     IConverter converter = ConveterFactory.FindConverter(pType);
-                    if (pType != null) {
+                    if (converter != null) {
                         propertyInfo.SetValue(obj, converter.BuildValue(entities[entityName], pType), index:null);
                     } else {
                         if (pType.IsValueType) {
