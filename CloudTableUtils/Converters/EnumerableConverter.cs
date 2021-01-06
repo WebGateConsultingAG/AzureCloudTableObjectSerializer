@@ -4,7 +4,7 @@ using Microsoft.Azure.Cosmos.Table;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 namespace WebGate.Azure.CloudTableUtils.Converter {
-    public class IEnumerableConverter:IConverter {
+    public class EnumerableConverter:IConverter {
         
         public bool IsType(Type type) {
             return type.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof (IEnumerable<>)) ;

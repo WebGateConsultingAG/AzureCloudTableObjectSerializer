@@ -5,7 +5,7 @@ using Microsoft.Azure.Cosmos.Table;
 using WebGate.Azure.CloudTableUtils.Converter;
 namespace WebGate.Azure.CloudTableUtils
 {
-    public class ObjectSerializer{
+    public static class ObjectSerializer{
 
         public static IDictionary<String,EntityProperty>Serialize(object obj) {
             IDictionary<String,EntityProperty> entities = new Dictionary<String,EntityProperty>();
@@ -21,7 +21,7 @@ namespace WebGate.Azure.CloudTableUtils
                     IConverter converter = ConveterFactory.FindConverter(value.GetType());
                     if (converter == null) {
                         if (value.GetType().IsValueType) {
-                            throw new Exception("No convertor found for: "+id +" / "+ propertyInfo.GetType().ToString());
+                            throw new ConverterException("No convertor found for: "+id +" / "+ propertyInfo.GetType().ToString());
                         } else {
                             ProcessObject(value, BuildEntityName(path,id), entities);
                         }
