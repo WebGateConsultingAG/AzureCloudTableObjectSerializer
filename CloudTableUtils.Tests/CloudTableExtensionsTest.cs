@@ -24,6 +24,93 @@ namespace WebGate.Azure.CloudTableUtilsTest {
             Assert.IsInstanceOfType(spo, typeof(SimplePoco));
             Assert.AreEqual("001", spo.Id);
         }
+
+        [TestMethod]
+        public async Task TestGetAllWithPartitionKeyExtension() {
+            
+            TableQuerySegment<DynamicTableEntity> result = TestHelper.CreateTableQuerySegment(TestHelper.GenerateListOfSimplePoco());
+            var mock = new Mock<CloudTableMock>();
+            mock.Setup(cloudTable=>cloudTable.ExecuteQuerySegmentedAsync(It.IsAny<TableQuery<DynamicTableEntity>>(),It.IsAny<TableContinuationToken>())).ReturnsAsync(result);
+            List<SimplePoco> simplePocos = await CloudTableUtils.CloudTableExtension.CloudTableExtensions.GetAllAsync<SimplePoco>(mock.Object,"SimplePoco");
+            Assert.IsNotNull(simplePocos);
+            Assert.AreEqual(6, simplePocos.Count());
+            SimplePoco spo = simplePocos.ElementAt(0);
+            Assert.IsInstanceOfType(spo, typeof(SimplePoco));
+            Assert.AreEqual("001", spo.Id);
+        }
+        [TestMethod]
+        public async Task TestGetAlByQuery() {
+            
+            TableQuery<DynamicTableEntity> query = new TableQuery<DynamicTableEntity>();
+            TableQuerySegment<DynamicTableEntity> result = TestHelper.CreateTableQuerySegment(TestHelper.GenerateListOfSimplePoco());
+            var mock = new Mock<CloudTableMock>();
+            mock.Setup(cloudTable=>cloudTable.ExecuteQuerySegmentedAsync(It.IsAny<TableQuery<DynamicTableEntity>>(),It.IsAny<TableContinuationToken>())).ReturnsAsync(result);
+            List<SimplePoco> simplePocos = await CloudTableUtils.CloudTableExtension.CloudTableExtensions.GetAllByQueryAsync<SimplePoco>(mock.Object,query);
+            Assert.IsNotNull(simplePocos);
+            Assert.AreEqual(6, simplePocos.Count());
+            SimplePoco spo = simplePocos.ElementAt(0);
+            Assert.IsInstanceOfType(spo, typeof(SimplePoco));
+            Assert.AreEqual("001", spo.Id);
+        }
+        [TestMethod]
+        public async Task TestGetAllById() {
+            
+            TableResult result = new TableResult();
+            result.Result = TestHelper.GenerateListOfSimplePoco().ElementAt(0);
+            var mock = new Mock<CloudTableMock>();
+            mock.Setup(cloudTable=>cloudTable.ExecuteAsync(It.IsAny<TableOperation>() )).ReturnsAsync(result);
+            SimplePoco spo = await CloudTableUtils.CloudTableExtension.CloudTableExtensions.GetByIdAsync<SimplePoco>(mock.Object, "001");
+            Assert.IsInstanceOfType(spo, typeof(SimplePoco));
+            Assert.AreEqual("001", spo.Id);
+        }
+
+        [TestMethod]
+        public async Task TestGetAllByIdAndPartionKey() {
+            
+            TableResult result = new TableResult();
+            result.Result = TestHelper.GenerateListOfSimplePoco().ElementAt(0);
+            var mock = new Mock<CloudTableMock>();
+            mock.Setup(cloudTable=>cloudTable.ExecuteAsync(It.IsAny<TableOperation>() )).ReturnsAsync(result);
+            SimplePoco spo = await CloudTableUtils.CloudTableExtension.CloudTableExtensions.GetByIdAsync<SimplePoco>(mock.Object, "001", "SimplePoco");
+            Assert.IsInstanceOfType(spo, typeof(SimplePoco));
+            Assert.AreEqual("001", spo.Id);
+        }
+
+        [TestMethod]
+        public async Task TestInsertOrReplace() {
+            
+            TableResult result = new TableResult();
+            SimplePoco spo =SimplePoco.CreateInitializedPoco();
+            result.Result = TestHelper.GenerateListOfSimplePoco().ElementAt(0);
+            var mock = new Mock<CloudTableMock>();
+            mock.Setup(cloudTable=>cloudTable.ExecuteAsync(It.IsAny<TableOperation>() )).ReturnsAsync(result);
+            TableResult tableResult = await CloudTableUtils.CloudTableExtension.CloudTableExtensions.InsertOrReplaceAsync(mock.Object, "001", "SimplePoco", spo);
+            Assert.IsNotNull(tableResult);
+        }
+        [TestMethod]
+        public async Task TestInsertOrMerge() {
+            
+            TableResult result = new TableResult();
+            SimplePoco spo =SimplePoco.CreateInitializedPoco();
+            result.Result = TestHelper.GenerateListOfSimplePoco().ElementAt(0);
+            var mock = new Mock<CloudTableMock>();
+            mock.Setup(cloudTable=>cloudTable.ExecuteAsync(It.IsAny<TableOperation>() )).ReturnsAsync(result);
+            TableResult tableResult = await CloudTableUtils.CloudTableExtension.CloudTableExtensions.InsertOrMergeAsync(mock.Object, "001", "SimplePoco", spo);
+            Assert.IsNotNull(tableResult);
+        }
+
+        [TestMethod]
+        public async Task TestDelete() {
+            
+            TableResult result = new TableResult();
+            result.Result = TestHelper.GenerateListOfSimplePoco().ElementAt(0);
+            var mock = new Mock<CloudTableMock>();
+            mock.Setup(cloudTable=>cloudTable.ExecuteAsync(It.IsAny<TableOperation>() )).ReturnsAsync(result);
+            TableResult tableResult = await CloudTableUtils.CloudTableExtension.CloudTableExtensions.DeleteAsync(mock.Object, "001", "SimplePoco");
+            Assert.IsNotNull(tableResult);
+        }
+
+
     }
 
 
