@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace WebGate.Azure.CloudTableUtils.Converter {
 
-    public class ConveterFactory {
+    public static class ConveterFactory {
         private static List<IConverter> converters = null;
 
         public static IConverter FindConverter(Type type) {
