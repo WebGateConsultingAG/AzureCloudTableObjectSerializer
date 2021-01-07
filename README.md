@@ -59,7 +59,7 @@ Gets alls entites that matches the query.
 ```c#
 MyPoco poco = new MyPoco();
 // Do magicStuff with poco
-TableResult result = await cloudTable.InsertOrMergeAsync(mock.Object, "001", "SimplePoco", poco);
+TableResult result = await cloudTable.InsertOrMergeAsync("001", "SimplePoco", poco);
 ```
 
 Creates or merges a specific object into the cloud table. The selection is done by id and partitionkey.
@@ -69,7 +69,7 @@ Creates or merges a specific object into the cloud table. The selection is done 
 ```c#
 MyPoco poco = new MyPoco();
 // Do magicStuff with poco
-TableResult result = await cloudTable.InsertOrReplaceAsync(mock.Object, "001", "SimplePoco", poco);
+TableResult result = await cloudTable.InsertOrReplaceAsync("001", "SimplePoco", poco);
 ```
 
 Creates or replace a specific object into the cloud table. The selection is done by id and partitionkey.
@@ -77,7 +77,7 @@ Creates or replace a specific object into the cloud table. The selection is done
 ### DeleteAsync(string id, string partition)
 
 ```c#
-TableResult result = await cloudTable.DeleteAsync(mock.Object, "001", "SimplePoco");
+TableResult result = await cloudTable.DeleteAsync("001", "SimplePoco");
 ```
 
 Deletes a specific object into the cloud table. The selection is done by id and partitionkey.
