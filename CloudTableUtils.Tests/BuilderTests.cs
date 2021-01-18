@@ -65,12 +65,24 @@ namespace WebGate.Azure.CloudTableUtilsTest
             Assert.IsNotNull(build);
             Assert.IsInstanceOfType(build, typeof(MainWithParent));
         }
-                [TestMethod]
+        [TestMethod]
         public void TestConverterException() {
             IDictionary<String,EntityProperty> testEntities = new Dictionary<string,EntityProperty>();
             testEntities.Add("CharValue",new EntityProperty("X"));
             Assert.ThrowsException<ConverterException>(()=>ObjectBuilder.Build<UnsupportedTypePoco>(testEntities));
         } 
+
+        [TestMethod]
+        public void TestBuildAllEntitesFromBooleanAndByte() {
+            ByteAndBooleanPoco spo = ByteAndBooleanPoco.Create();
+            IDictionary<String,EntityProperty> allEntities = ObjectSerializer.Serialize(spo);
+            Assert.AreEqual(3, allEntities.Count);
+            ByteAndBooleanPoco build = ObjectBuilder.Build<ByteAndBooleanPoco>(allEntities);
+            Assert.IsNotNull(build);
+            Assert.AreEqual(spo.BoolValue, build.BoolValue);
+            Assert.AreEqual(spo.BooleanValue, build.BooleanValue);
+            Assert.AreEqual(spo.ByteValue, build.ByteValue);
+        }
 
     }
 }
