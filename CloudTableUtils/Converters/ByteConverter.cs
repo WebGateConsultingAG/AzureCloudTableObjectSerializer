@@ -14,7 +14,7 @@ namespace WebGate.Azure.CloudTableUtils.Converter {
         }
 
         public object BuildValue(EntityProperty entityProperty, Type type) {
-            return null;
+            return entityProperty.BinaryValue;
         }
 
     }

@@ -6,7 +6,7 @@ namespace WebGate.Azure.CloudTableUtilsTest {
 
         public Boolean BooleanValue {set;get;}
 
-        public byte[] ByteValue {set;get}
+        public byte[] ByteValue {set;get;}
 
         public static ByteAndBooleanPoco Create() {
             ByteAndBooleanPoco bbp = new ByteAndBooleanPoco();

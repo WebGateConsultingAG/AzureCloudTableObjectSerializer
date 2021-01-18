@@ -169,5 +169,25 @@ namespace WebGate.Azure.CloudTableUtilsTest
             Assert.ThrowsException<ConverterException>(()=>ObjectSerializer.Serialize(ustp));
         } 
 
+        [TestMethod]
+        public void TestBooleanAndByte() {
+            ByteAndBooleanPoco spo = ByteAndBooleanPoco.Create();
+            IDictionary<String,EntityProperty> allEntities = ObjectSerializer.Serialize(spo);
+            Assert.AreEqual(3, allEntities.Count);
+            //CHECK ID
+            Assert.IsTrue(allEntities.ContainsKey("BoolValue"));
+            Assert.AreEqual(allEntities["BoolValue"].BooleanValue, spo.BoolValue);
+            Assert.AreEqual(allEntities["BoolValue"].PropertyType, EdmType.Boolean);
+            
+            Assert.IsTrue(allEntities.ContainsKey("BooleanValue"));
+            Assert.AreEqual(allEntities["BooleanValue"].BooleanValue, spo.BooleanValue);
+            Assert.AreEqual(allEntities["BooleanValue"].PropertyType, EdmType.Boolean);
+
+            Assert.IsTrue(allEntities.ContainsKey("ByteValue"));
+            Assert.AreEqual(allEntities["ByteValue"].BinaryValue, spo.ByteValue);
+            Assert.AreEqual(allEntities["ByteValue"].PropertyType, EdmType.Binary);
+
+        }
+
     }
 }
