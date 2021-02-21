@@ -34,6 +34,9 @@ namespace WebGate.Azure.CloudTableUtils.CloudTableExtension {
             TableOperation retrive = TableOperation.Retrieve<DynamicTableEntity>(partition,id);
             TableResult result = await cloudTable.ExecuteAsync(retrive);
             DynamicTableEntity dte = result.Result as DynamicTableEntity;
+            if (dte == null) {
+                return default(T);
+            }
             return ObjectBuilder.Build<T>(dte.Properties);
         }
 
@@ -49,7 +52,7 @@ namespace WebGate.Azure.CloudTableUtils.CloudTableExtension {
             TableOperation inserOrReplace = TableOperation.InsertOrMerge(dte);
             return await cloudTable.ExecuteAsync(inserOrReplace);
         }
-        public static async Task<TableResult> DeleteAsync(this CloudTable cloudTable, string id, string partition) {
+        public static async Task<TableResult> DeleteEntryAsync(this CloudTable cloudTable, string id, string partition) {
             DynamicTableEntity dte = new DynamicTableEntity(partition, id){ ETag = "*" };
             TableOperation inserOrReplace = TableOperation.Delete(dte);
             return await cloudTable.ExecuteAsync(inserOrReplace);

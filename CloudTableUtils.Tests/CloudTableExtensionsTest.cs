@@ -77,6 +77,18 @@ namespace WebGate.Azure.CloudTableUtilsTest {
         }
 
         [TestMethod]
+        public async Task TestGetAllByIdAndPartionKeyNotFound() {
+            
+            TableResult result = new TableResult();
+            result.Result = null;
+            var mock = new Mock<CloudTableMock>();
+            mock.Setup(cloudTable=>cloudTable.ExecuteAsync(It.IsAny<TableOperation>() )).ReturnsAsync(result);
+            SimplePoco spo = await CloudTableUtils.CloudTableExtension.CloudTableExtensions.GetByIdAsync<SimplePoco>(mock.Object, "001", "SimplePoco");
+            Assert.IsNull(spo);
+        }
+
+
+        [TestMethod]
         public async Task TestInsertOrReplace() {
             
             TableResult result = new TableResult();
@@ -106,7 +118,7 @@ namespace WebGate.Azure.CloudTableUtilsTest {
             result.Result = TestHelper.GenerateListOfSimplePoco().ElementAt(0);
             var mock = new Mock<CloudTableMock>();
             mock.Setup(cloudTable=>cloudTable.ExecuteAsync(It.IsAny<TableOperation>() )).ReturnsAsync(result);
-            TableResult tableResult = await CloudTableUtils.CloudTableExtension.CloudTableExtensions.DeleteAsync(mock.Object, "001", "SimplePoco");
+            TableResult tableResult = await CloudTableUtils.CloudTableExtension.CloudTableExtensions.DeleteEntryAsync(mock.Object, "001", "SimplePoco");
             Assert.IsNotNull(tableResult);
         }
 
