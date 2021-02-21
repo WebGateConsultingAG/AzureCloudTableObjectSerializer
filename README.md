@@ -35,7 +35,8 @@ Gets all data from a table and convert them into the specified Object. A partiti
 MyPoco poco = await.GetByIdAsync<MyPoco>('1018301');
 ```
 
-Gets as specific entity from the table and convert it to the specified object. The name of the type is used as partitionkey. In the current example 'MyPoco'
+Gets as specific entity from the table and convert it to the specified object. The name of the type is used as partitionkey. In the current example 'MyPoco'.
+If the id+partitionkey combination finds now object null is returned (using default(T))
 
 ### GetByIdAsync<T>(string id, string partition)
 
@@ -44,6 +45,7 @@ MyPoco poco = await.GetByIdAsync<MyPoco>('9201u819','mypoco');
 ```
 
 Gets as specific enitity form the table and convert it to the specified object. The partionkey is the 2nd argument.
+If the id+partitionkey combination finds now object null is returned (using default(T))
 
 ### GetAllByQueryAsync(TableQuery query)
 
@@ -74,7 +76,7 @@ TableResult result = await cloudTable.InsertOrReplaceAsync("001", "SimplePoco", 
 
 Creates or replace a specific object into the cloud table. The selection is done by id and partitionkey.
 
-### DeleteAsync(string id, string partition)
+### DeleteEntryAsync(string id, string partition)
 
 ```c#
 TableResult result = await cloudTable.DeleteAsync("001", "SimplePoco");
