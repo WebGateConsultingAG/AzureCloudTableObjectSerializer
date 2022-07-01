@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageId>WebGate.Azure.CloudTableUtils</PackageId>
-    <Version>1.1.0</Version>
+    <Version>2.0.0-rc1</Version>
     <Authors>guedeWebGate</Authors>
     <Company>WebGate Consulting AG</Company>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
@@ -21,6 +21,7 @@ Complex entities, arrays and IEnumerable are also supported.</Description>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="1.0.8" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.1.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
   </ItemGroup>
 
