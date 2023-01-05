@@ -12,25 +12,27 @@ namespace WebGate.Azure.Functions.Utils {
             _logger = logger;
 
             string env = GetEnvironmentVariable("AZURE_FUNCTIONS_ENVIRONMENT");
+            bool _isDev = String.IsNullOrEmpty(GetEnvironmentVariable("IS_NOT_DEV"));
 
-            if (env == "Development") {
-                _isDev = String.IsNullOrEmpty(GetEnvironmentVariable("IS_NOT_DEV"));
+            if (env == "Development" && _isDev) {
 
                 string envUserId = GetEnvironmentVariable("DEV_USER_ID");
+                string rolesByEnvironment = GetEnvironmentVariable("DEV_USER_ROLES");
                 if (String.IsNullOrEmpty(envUserId)) {
                     _userId = "LocalDev";
                 } else {
                     _userId = envUserId;
                 }
-
                 _authenticated = true;
-                _roles = new List<string>() { "admin" };
+                string[] allRoles = rolesByEnvironment != null ? rolesByEnvironment.Split(",") : new string[]{"admin"};
+                _roles = new List<string>(allRoles);
             } else {
                 string userId = principal.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier")?.Value;
                 if (!String.IsNullOrEmpty(userId)) {
                     _userId = userId;
                     _authenticated = true;
                 }
+                _upn= principal.FindFirst("https://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn")?.Value;
                 _roles = principal.Claims.Where(e => e.Type == "roles").Select(e => e.Value);
             }
         }
