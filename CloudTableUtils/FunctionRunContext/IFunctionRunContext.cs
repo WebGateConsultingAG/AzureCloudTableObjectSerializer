@@ -40,6 +40,14 @@ namespace WebGate.Azure.Functions.Utils {
         public string GetUserId();
 
         /// <summary>
+        /// Returns the upn of the user in the current context. Usually this is the email adress of the user currently accessing the application,
+        /// but if the application is not acting in a user context, this may not be the case.
+        /// </summary>
+        /// <remarks>IMPORTANT: Manually setting the user id may result in UNFORSEEABLE PROBLEMS! Please make sure that EVERYTHING in the call chain is doing what you want it to do!</remarks>
+        /// <returns>A string containing a userId</returns>
+        public string GetUPN();
+
+        /// <summary>
         /// Logs a message at debug level
         /// </summary>
         /// <param name="msg">The message to log</param>

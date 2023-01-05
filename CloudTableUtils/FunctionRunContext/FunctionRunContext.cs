@@ -13,6 +13,7 @@ namespace WebGate.Azure.Functions.Utils {
         protected HttpRequest _request;
         protected ILogger _logger;
         protected string _userId;
+        protected string _upn;
         protected bool _authenticated = false;
         protected bool _isDev = false;
         protected IEnumerable<string> _roles;
@@ -36,6 +37,9 @@ namespace WebGate.Azure.Functions.Utils {
 
         public string GetUserId() {
             return _userId;
+        }
+        public string GetUPN() {
+            return _upn;
         }
 
         public bool IsAuthenticated() {
