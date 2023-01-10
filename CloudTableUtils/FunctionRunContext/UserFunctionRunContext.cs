@@ -32,7 +32,7 @@ namespace WebGate.Azure.Functions.Utils {
                     _userId = userId;
                     _authenticated = true;
                 }
-                _upn= principal.FindFirst("https://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn")?.Value;
+                _upn= principal.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn")?.Value;
                 _roles = principal.Claims.Where(e => e.Type == "roles").Select(e => e.Value);
             }
         }
