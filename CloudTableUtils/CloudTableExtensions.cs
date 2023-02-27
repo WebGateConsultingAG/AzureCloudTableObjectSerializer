@@ -19,7 +19,7 @@ namespace WebGate.Azure.CloudTableUtils.CloudTableExtension {
             TableContinuationToken token = null;
             List<DynamicTableEntity> resultTE = new List<DynamicTableEntity>();
             do {
-                TableQuerySegment<DynamicTableEntity> segment = await cloudTable.ExecuteQuerySegmentedAsync<DynamicTableEntity>(query, null);
+                TableQuerySegment<DynamicTableEntity> segment = await cloudTable.ExecuteQuerySegmentedAsync<DynamicTableEntity>(query, token);
                 token = segment.ContinuationToken;
                 resultTE.AddRange(segment.Results);
             } while(token != null);
